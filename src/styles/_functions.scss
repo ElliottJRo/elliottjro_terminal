@@ -1,0 +1,96 @@
+@mixin container-padding() {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@mixin fontFace($family,$src,$style: normal,$weight: normal) {
+  @font-face {
+    font-family: $family;
+    src:url("#{$src}.eot"); //IE9 Compatible
+    src:url("#{$src}.eot?#iefix") format("embedded-opentype"), //IE8 below
+      url("#{$src}.woff") format("woff"), // Standards
+      url("#{$src}.ttf") format("truetype"), // Safari, Android, iOS
+      url("#{$src}.svg##{$family}") format("svg"); // legacy iOS
+    font-weight: $style;
+    font-style: $weight;
+  }
+}
+
+@mixin animation($name, $duration, $iteration-count: "", $timing-function: "", $direction: "") {
+  animation-name: $name;
+  -webkit-animation-name: $name;
+  -moz-animation-name: $name;
+  animation-duration: $duration;
+  -webkit-animation-duration: $duration;
+  -moz-animation-duration: $duration;
+  @if $iteration-count != "" {
+    animation-iteration-count: $iteration-count;
+    -webkit-animation-iteration-count: $iteration-count;
+    -moz-animation-iteration-count: $iteration-count;
+  }
+  @if $timing-function != "" {
+    animation-timing-function: $timing-function;
+    -webkit-animation-timing-function: $timing-function;
+    -moz-animation-timing-function: $timing-function;
+  }
+  @if $direction != "" {
+    animation-direction: $direction;
+    -webkit-animation-direction: $direction;
+    -moz-animation-direction: $direction;
+  }
+}
+
+@mixin multiple-animation($param1, $param2) {
+  animation: (#{$param1}), (#{$param2});
+  -webkit-animation: (#{$param1}), (#{$param2});
+  -moz-animation: (#{$param1}), (#{$param2});
+}
+
+@mixin transitions($param) {
+    -o-transition: (#{$param});
+    -moz-transition: (#{$param});
+    -webkit-transition: (#{$param});
+    transition: (#{$param});
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@include keyframes(rotate) {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@include keyframes(dash) {
+  0% {
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -124;
+  }
+}
+
+@include keyframes(progress) {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
